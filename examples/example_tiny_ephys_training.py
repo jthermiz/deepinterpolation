@@ -7,6 +7,9 @@ import datetime
 from typing import Any, Dict
 import pathlib
 
+# Path where the mode in dumped
+save_model_path = 'models/'
+
 # This is used for record-keeping
 now = datetime.datetime.now()
 run_uid = now.strftime("%Y_%m_%d_%H_%M")
@@ -97,7 +100,7 @@ training_param["model_string"] = (
 
 # Where do you store ongoing training progress
 jobdir = os.path.join(
-    "/Users/jeromel/test", training_param["model_string"] + "_" + run_uid,
+    save_model_path, training_param["model_string"] + "_" + run_uid,
 )
 training_param["output_dir"] = jobdir
 

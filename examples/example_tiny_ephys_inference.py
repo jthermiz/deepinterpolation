@@ -5,6 +5,10 @@ import pathlib
 generator_param = {}
 inferrence_param = {}
 
+# Path where the model in dumped
+save_model_path = '/home/jhermiz/software/deepinterpolation/models/'
+model_file = '/home/jhermiz/software/deepinterpolation/models/big_model/2020_02_29_15_28_unet_single_ephys_1024_mean_squared_error-1050.h5'
+
 # We are reusing the data generator for training here. Some parameters like steps_per_epoch are irrelevant but currently needs to be provided
 generator_param["type"] = "generator"
 generator_param["name"] = "EphysGenerator"
@@ -18,7 +22,7 @@ generator_param["train_path"] = os.path.join(
     pathlib.Path(__file__).parent.absolute(),
     "..",
     "sample_data",
-    "ephys_tiny_continuous.dat2",
+    "noisy_sine_np.dat2",
 )
 
 generator_param["batch_size"] = 100
@@ -35,14 +39,14 @@ inferrence_param["name"] = "core_inferrence"
 # Replace this path to where you stored your model
 inferrence_param[
     "model_path"
-] = "/Users/jeromel/Documents/Work documents/Allen Institute/Projects/Deep2P/repos/public/deepinterpolation_models/deep_interpolation_neuropixel_v1/2020_02_29_15_28_unet_single_ephys_1024_mean_squared_error-1050.h5"
+] = os.path.join(save_model_path, model_file)
 
 # Replace this path to where you want to store your output file
 inferrence_param[
     "output_file"
-] = "/Users/jeromel/test/ephys_tiny_continuous_deep_interpolation.h5"
+] = os.path.join(save_model_path, 'tiny_ephys.h5')
 
-jobdir = "/Users/jeromel/test/"
+jobdir = save_model_path
 
 try:
     os.mkdir(jobdir)
